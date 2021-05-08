@@ -4,7 +4,7 @@ const {
   } = require("./quiz.controller");
 
 
-router.get("/quizcategories", getHomeQuizCategory);
+router.get("/quizcategory", getHomeQuizCategory);
 
 
 

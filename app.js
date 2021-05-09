@@ -16,8 +16,8 @@ app.use(express.json());
 app.use(helmet.noSniff());
 
 // Intialize Routers
-app.use("/hyperquizo/api/users", userRouter);
-app.use("/hyperquizo/api/quiz", quizRouter);
+app.use("/hyperquizo/api/v1/users", userRouter);
+app.use("/hyperquizo/api/v1/quiz", quizRouter);
 
 //Handle Errors
 app.use((req, res, next) => {

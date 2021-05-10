@@ -3,6 +3,7 @@ const express = require("express");
 const helmet = require('helmet');
 const app = express();
 const morgan = require('morgan');
+var path = require('path');
 
 // Declare Routers
 const userRouter = require("./hyperquizo/api/users/user.router");
@@ -14,10 +15,14 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 app.use(helmet.noSniff());
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Intialize Routers
 app.use("/hyperquizo/api/v1/users", userRouter);
 app.use("/hyperquizo/api/v1/quiz", quizRouter);
+app.get("/", function(req,res,next){
+  res.send("Wlecome To HyperNation");
+})
 
 //Handle Errors
 app.use((req, res, next) => {

@@ -2,20 +2,21 @@ const mysql = require("../../config/database");
 
 module.exports = {
 
- 
+  // Get USerData by mid
+  loginProcess: (id, callBack) => {
 
-  getUserbyID: (id, callBack) => {
     mysql.query(
-      'select * from Users where uid = ?',
-      [id],
-      (error, results, fields) => {
-        if (error) {
-          callBack(error);
-        }
-        return callBack(null, results[0]);       
-      });
+        'select * from Users where mid = ?',
+        [id],
+        (error, results, fields) => {
+          if (error) {
+            callBack(error);
+          }
+          return callBack(null, results[0]);
+        });
   },
 
+  // Get UserData by referCode
   getUserCode: (friendCode, callBack) => {
     mysql.query(
       'select * from Users where referCode = ?',
@@ -28,6 +29,7 @@ module.exports = {
       });
   },
 
+  // get user data by phone number
   getUserNumber: (number, callBack) => {
     mysql.query(
       'select * from Users where number = ?',
@@ -41,31 +43,35 @@ module.exports = {
     );
   },
 
-
-
-
-
-
-
-
-  // Other Services
- 
-  getUID: (body, callBack) => {
-    mysql.query(
-      'select * from Users where uid = ?',
-      [body.id],
-      (error, results, fields) => {
-        if (error) {
-          callBack(error);
-        } 
-        return callBack(null, results[0]);
+  checkUserTokens: (token, callBack) =>{
+    mysql.query('select * from usedTokens where token = ?', [token],
+    (error, results, fields) => {
+      if(error){
+        callBack(error);
       }
-    );
+      if(results[0]){
+        return callBack(null, "Already Used")
+      }else{
+        return callBack(null, "Not Used")
+      }
+    });
   },
-  getUserEmail: (body, callBack) => {
+
+  setUserTokens: (data, callBack) =>{
+    mysql.query('insert into usedTokens (token, issuedTime) values(?,?)', [data.token, data.time],
+    (error, results, fields) => {
+      if(error){
+        callBack(error);
+      }
+      return callBack(null, "Token Stored")
+    });
+  },
+
+  // get user data by email
+  getUserEmail: (email, callBack) => {
     mysql.query(
       'select * from Users where email = ?',
-      [body.email],
+      [email],
       (error, results, fields) => {
         if (error) {
           callBack(error);
@@ -75,21 +81,10 @@ module.exports = {
     );
   },
   
-  getUserNewCode: (referCode, callBack) => {
-    mysql.query(
-      'select * from Users where referCode = ?',
-      [referCode],
-      (error, results, fields) => {
-        if (error) {
-          callBack(error);
-        } 
-        return callBack(null, results[0]);
-      }
-    );
-  },
+  // get user data by username
   getUsername: (body, callBack) => {
     mysql.query(
-      'select * from Users where userName = ?',
+      'select * from Users where username = ?',
       [body.userName],
       (error, results, fields) => {
         if (error) {

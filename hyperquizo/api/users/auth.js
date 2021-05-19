@@ -1,76 +1,70 @@
 const mysql = require("../../config/database");
-const { loginProcess, loginNumberProcess } = require("./login.service");
 const { register } = require("./register.service");
-const { getUserbyID, getUserNumber } = require("./user.service");
+const { getUserNumber, getUserEmail, loginProcess } = require("./user.service");
 
 module.exports = {
 
     authProcess: (data, callBack) => {
-        getUserbyID(data.uid, (err, results) => {
-            if(err){
-                callBack(err);
-            }
-            if(results){
-                //Login Process
-                loginProcess(data.uid,(err, results) =>{
-                    if(err){
-                        callBack(err);
-                        
-                    }
-                    if(results){
-                        const msg = "Login";
-                        return callBack(null, results, msg);
-                    }
+        let mid;
 
-                });
-            }
-            else{
-                if(data.number == ""){
-                //Register Process
-                    register(data, (err, results) =>{
+        // Check Phone Number Auth or not
+        if (!data.number == ""){
+            // Phone Number Auth Process
+            getUserNumber(data.number,(err, results)=>{
+                if(err){
+                    callBack(err);
+                }
+                if(results){
+                    mid = results.mid;
+                    // Login Process (Phone Number Login)
+                    loginProcess(mid,(err, results)=>{
                         if(err){
-                        callBack(err);
-                        }
-                    return callBack(null, results, "Register")
-
-                    });
-
-                }else {
-                    getUserNumber(data.number, (err, results) =>{
-                        if(err){
-                            callBack(err)
+                            callBack(err);
                         }
                         if(results){
-                            //Login Process By Number
-                            loginNumberProcess(data.number, (err, results)=>{
-                                if(err){
-                                    callBack(err)
-                                }
-                                if(results){
-                                    const msg = "Login";
-                                    return callBack(null, results, msg);
-                                }
-                            });
-                        }else{
-                            //Register Process
+                            const msg = "Login"
+                            return callBack(null, results, msg);
+                        }
+                    });
+                } else{
+                    // Register Process (Phone Number)
                     register(data, (err, results) =>{
                         if(err){
-                        callBack(err);
+                            callBack(err);
                         }
-                    return callBack(null, results, "Register")
-
-                    });
-
-                        }
-
+                        return callBack(null, results, "Register")
                     });
                 }
-                
-                
-            }
+            });
+        } else{
+            // Google Auth Process
+            getUserEmail(data.email, (err, results)=>{
+                if(err){
+                    callBack(err)
+                }
+                if(results){
+                    mid = results.mid;
+                    // Login Process (Google)
+                    loginProcess(mid,(err, results)=>{
+                        if(err){
+                            callBack(err);
+                        }
+                        if(results){
+                            const msg = "Login"
+                            return callBack(null, results, msg);
+                        }
+                    });
+                }else{
+                    // Register Process (Google)
+                    register(data, (err, results) =>{
+                        if(err){
+                            callBack(err);
+                        }
+                        return callBack(null, results, "Register")
+                    });
 
-
-        });
-
+                }
+            });
+        }
     },
 };

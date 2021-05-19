@@ -1,12 +1,8 @@
 const {
   getUserCode,
-  getUserEmail, 
-  getUserNewCode,
+  getUserEmail,
   getUsername,
-  getUID
 } = require("./user.service");
-const { register } = require("./register.service");
-const { loginProcess } = require("./login.service");
 const { authProcess } = require("./auth");
 const { referralProcess } = require("./referral");
 
@@ -22,34 +18,34 @@ module.exports = {
         const errors = err;
         return res.status(500).json({
           success: 0,
-          message: "Database connection errror : ",errors
+          message: "Database connection errror : ", errors
         });
       }
       if (results) {
-        if(message === "Login"){
+        if (message === "Login") {
           return res.status(200).json({
-            success: 0,
+            success: 1,
             message: message,
             data: results
           });
-        }else {
+        } else {
           return res.status(201).json({
             success: 1,
-            message : message,
+            message: message,
             data: results
           });
 
         }
-        
-       
-      }else {
+
+
+      } else {
         return res.status(400).json({
           success: 0,
           message: "Something Went Wrong"
         });
-        
+
       }
-      
+
     });
   },
 
@@ -62,33 +58,33 @@ module.exports = {
         const errors = err;
         return res.status(500).json({
           success: 0,
-          message: "Database connection errror : ",errors
+          message: "Database connection errror : ", errors
         });
       }
       if (results) {
         const msg = "Invalid Referral Code"
-        if(results == msg){
+        if (results == msg) {
           return res.status(404).json({
             success: 0,
             message: msg
           });
-        }else {
+        } else {
           return res.status(201).json({
             success: 1,
-            message : results,
+            message: results,
           });
 
         }
 
 
-      }else {
+      } else {
         return res.status(400).json({
           success: 0,
           message: "Something Went Wrong"
         });
-        
+
       }
-      
+
     });
   },
 
@@ -105,25 +101,25 @@ module.exports = {
         const errors = err;
         return res.status(500).json({
           success: 0,
-          message: "Database connection errror : ",errors
+          message: "Database connection errror : ", errors
         });
       }
       if (results) {
-        if(results === "Unauthorised"){
+        if (results === "Unauthorised") {
           return res.status(401).json({
             success: 0,
             message: "Unauthorised"
           });
-        }else {
+        } else {
           return res.status(201).json({
             success: 1,
-            message : "User Registered",
+            message: "User Registered",
             data: results
           });
 
         }
-        
-       
+
+
       }
       return res.status(400).json({
         success: 0,
@@ -140,16 +136,16 @@ module.exports = {
         const errors = err;
         return res.status(500).json({
           success: 0,
-          message: "Database connection errror : ",errors
+          message: "Database connection errror : ", errors
         });
       }
       if (results) {
         return res.status(200).json({
           success: 1,
           data: results,
-          
+
         });
-        
+
       } else {
         return res.status(404).json({
           success: 0,
@@ -157,9 +153,9 @@ module.exports = {
           results
         });
       }
-      
+
     });
-    
+
   },
 
   checkData: (req, res) => {
@@ -178,28 +174,28 @@ module.exports = {
         return res.status(400).json({
           success: 0,
           message: "Error",
-          
+
         });
-        
+
       } else {
-        if(message == "Success"){
+        if (message == "Success") {
           return res.status(200).json({
             success: 1,
             message: message,
           });
 
-        }else{
+        } else {
           return res.status(404).json({
             success: 0,
             message: message,
           });
 
         }
-          
-          
-        
+
+
+
       }
-      
+
     });
   },
   google: (req, res) => {
@@ -213,17 +209,17 @@ module.exports = {
         return res.status(200).json({
           success: 1,
           message: "User Registered"
-          
+
         });
-        
+
       } else {
         return res.status(404).json({
           success: 0,
           message: "User Not Found"
-          
+
         });
       }
-      
+
     });
   },
   checkEmail: (req, res) => {
@@ -234,24 +230,24 @@ module.exports = {
         const errors = err;
         return res.status(500).json({
           success: 0,
-          message: "Database connection errror : ",errors
+          message: "Database connection errror : ", errors
         });
       }
       if (!results) {
         return res.status(404).json({
           success: 1,
           message: "Email Not Found"
-          
+
         });
-        
+
       } else {
         return res.status(200).json({
           success: 0,
           message: "Email Registered"
-          
+
         });
       }
-      
+
     });
   },
   checkCode: (req, res) => {
@@ -262,7 +258,7 @@ module.exports = {
         const errors = err;
         return res.status(500).json({
           success: 0,
-          message: "Database connection errror : ",errors
+          message: "Database connection errror : ", errors
         });
       }
       if (results) {
@@ -271,7 +267,7 @@ module.exports = {
           message: "Refer Code Valid",
           results
         });
-        
+
       } else {
         return res.status(200).json({
           success: 0,
@@ -279,7 +275,7 @@ module.exports = {
           results
         });
       }
-      
+
     });
   },
   checkNewCode: (req, res) => {
@@ -290,7 +286,7 @@ module.exports = {
         const errors = err;
         return res.status(500).json({
           success: 0,
-          message: "Database connection errror : ",errors
+          message: "Database connection errror : ", errors
         });
       }
       if (!results) {
@@ -299,7 +295,7 @@ module.exports = {
           message: "Refer Code Not Available",
           results
         });
-        
+
       } else {
         return res.status(200).json({
           success: 0,
@@ -307,7 +303,7 @@ module.exports = {
           results
         });
       }
-      
+
     });
   },
   checkUsername: (req, res) => {
@@ -318,7 +314,7 @@ module.exports = {
         const errors = err;
         return res.status(500).json({
           success: 0,
-          message: "Database connection errror : ",errors
+          message: "Database connection errror : ", errors
         });
       }
       if (!results) {
@@ -327,7 +323,7 @@ module.exports = {
           message: "Username Not Available",
           results
         });
-        
+
       } else {
         return res.status(200).json({
           success: 0,
@@ -335,7 +331,7 @@ module.exports = {
           results
         });
       }
-      
+
     });
   },
 };

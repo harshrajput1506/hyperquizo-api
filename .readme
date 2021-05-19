@@ -1,0 +1,8 @@
+------------------------------------------- Requests ------------------------------------
+
+1. /post method endpoint - /hyperquizo/api/v1/users/2901
+
+Request Body - Bearer Token, uid, email, name, phoneNumber, profilePhoto
+Reponse Body - userData, message
+
+

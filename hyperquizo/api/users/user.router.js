@@ -4,8 +4,8 @@ const {
   auth,
   referral
 } = require("./user.controller");
-router.post("/2909", auth); //Main Request
-router.post("/2910",verifyToken, referral); //Optional Request For Referral Code
+router.post("/2901",verifyToken, auth); //Main Auth Request
+router.post("/2902",verifyToken, referral); //Optional Request For Referral Code
 
 
 

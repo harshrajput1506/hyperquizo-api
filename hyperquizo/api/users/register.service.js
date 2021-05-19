@@ -10,7 +10,7 @@ module.exports = {
       const mid = data.uid;
       
       // Get Username & referCode for Generate NewOne
-      mysql.query('select referCode, username from Users', [], function (error, results, fields) {
+      mysql.query('select referCode, username from users', [], function (error, results, fields) {
         if(error){
           callBack(error);
         }
@@ -21,7 +21,7 @@ module.exports = {
 
           // Register Process - Insert Query in users table
           mysql.query(
-            'insert into `Users` (mid, name, username, email, number, upiId, DOB, gender, state,'
+            'insert into `users` (mid, name, username, email, number, upiId, DOB, gender, state,'
                + 'referCode, friendCode,' 
                + 'profilePicture)' 
                + 'values(?,?,?,?,?,"","","","",?,"",?)',

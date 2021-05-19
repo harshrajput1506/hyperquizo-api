@@ -6,7 +6,7 @@ module.exports = {
   loginProcess: (id, callBack) => {
 
     mysql.query(
-        'select * from Users where mid = ?',
+        'select * from users where mid = ?',
         [id],
         (error, results, fields) => {
           if (error) {
@@ -19,7 +19,7 @@ module.exports = {
   // Get UserData by referCode
   getUserCode: (friendCode, callBack) => {
     mysql.query(
-      'select * from Users where referCode = ?',
+      'select * from users where referCode = ?',
       [friendCode],
       (error, results, fields) => {
         if (error) {
@@ -32,7 +32,7 @@ module.exports = {
   // get user data by phone number
   getUserNumber: (number, callBack) => {
     mysql.query(
-      'select * from Users where number = ?',
+      'select * from users where number = ?',
       [number],
       (error, results, fields) => {
         if (error) { 
@@ -70,7 +70,7 @@ module.exports = {
   // get user data by email
   getUserEmail: (email, callBack) => {
     mysql.query(
-      'select * from Users where email = ?',
+      'select * from users where email = ?',
       [email],
       (error, results, fields) => {
         if (error) {
@@ -84,7 +84,7 @@ module.exports = {
   // get user data by username
   getUsername: (body, callBack) => {
     mysql.query(
-      'select * from Users where username = ?',
+      'select * from users where username = ?',
       [body.userName],
       (error, results, fields) => {
         if (error) {

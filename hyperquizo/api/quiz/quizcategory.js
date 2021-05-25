@@ -3,7 +3,7 @@ const { getQuizContests } = require("./contest");
 const { getTrendingTopics } = require("./quiz.service");
 module.exports = {
     getQuizCategory: (callback) => {
-        mysql.query('select * from topics', [], (error, results, fields) => {
+        mysql.query('select * from topics order by title', [], (error, results, fields) => {
             if (error) {
                 callback(error);
             }

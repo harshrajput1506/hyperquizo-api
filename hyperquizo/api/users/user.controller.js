@@ -2,6 +2,7 @@ const {
   getUserCode,
   getUserEmail,
   getUsername,
+  loginProcess
 } = require("./user.service");
 const { authProcess } = require("./auth");
 const { referralProcess } = require("./referral");

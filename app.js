@@ -20,9 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Intialize Routers
 app.use("/hyperquizo/api/v1/users", userRouter);
 app.use("/hyperquizo/api/v1/quiz", quizRouter);
-app.get("/", function(req,res,next){
-  res.send("Wlecome To HyperNation");
-})
+
 
 //Handle Errors
 app.use((req, res, next) => {

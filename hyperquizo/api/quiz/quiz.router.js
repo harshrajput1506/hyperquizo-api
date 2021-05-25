@@ -6,8 +6,4 @@ const {
 
 router.get("/topics", getHomeQuizCategory);
 
-
-
-
-
 module.exports = router;

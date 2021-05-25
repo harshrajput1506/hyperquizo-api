@@ -130,7 +130,7 @@ module.exports = {
 
   login: (req, res) => {
     const body = req.body;
-    loginProcess(body, (err, results) => {
+    loginProcess(body.mid, (err, results) => {
       if (err) {
         console.log(err);
         const errors = err;

@@ -1,9 +1,9 @@
 const mysql = require("../../config/database")
 module.exports = {
     getQuizCategory: (callback) => {
-        const topTopics = [];
-        const trendingTopics = [];
-        const allTopics = [];
+        let topTopics = [];
+        let trendingTopics = [];
+        let allTopics = [];
         mysql.query('select topicId, title, icon from topics order by title', [], (error, results, fields) => {
             if (error) {
                 callback(error);

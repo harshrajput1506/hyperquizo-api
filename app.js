@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 
 app.use(express.json());
 app.use(helmet.noSniff());
-app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static(path.join(__dirname, 'public')))
 
 // Intialize Routers
 app.use("/hyperquizo/api/v1/users", userRouter);

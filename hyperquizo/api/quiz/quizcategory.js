@@ -8,6 +8,10 @@ module.exports = {
                 callback(error);
             }
             const allTopics = results;  //Array
+            const topicsData = {
+                topics: allTopics
+            };
+            return callback(null, topicsData);
             /*getTrendingTopics((err, results) => {
                 if(err){
                     callback(err)
@@ -18,15 +22,12 @@ module.exports = {
                         callback(err)
                     }
 
-                    const topTopics = results;   // Top Topics Array */
+                    const topTopics = results;   // Top Topics Array 
 
-                    const topicsData = {
-                        topics: allTopics
-                    };
-                    return callback(null, topicsData);
+                    
                 });
 
-            });
+            });*/
             
         });
     },

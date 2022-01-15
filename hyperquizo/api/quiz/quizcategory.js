@@ -2,7 +2,7 @@ const mysql = require("../../config/database")
 const { getQuizContests } = require("./contest");
 const { getTrendingTopics, getTopTopics } = require("./quiz.service");
 module.exports = {
-    getQuizCategory: (callback) => {title
+    getQuizCategory: (callback) => {
         mysql.query('select id, title, icon from topics limit 5', [], (error, results, fields) => {
             if (error) {
                 callback(error);

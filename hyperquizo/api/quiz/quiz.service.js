@@ -15,7 +15,7 @@ module.exports = {
     },
 
     getTopTopics: (callback) => {
-        mysql.query("select topicId, title, icon from topics order by views desc limit 8", [], (error, results, fields) =>{
+        mysql.query("select id, title, icon from topics limit 5", [], (error, results, fields) =>{
             if (error) {
                 callback(error);
             }

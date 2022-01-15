@@ -2,13 +2,13 @@ const mysql = require("../../config/database")
 const { getQuizContests } = require("./contest");
 const { getTrendingTopics, getTopTopics } = require("./quiz.service");
 module.exports = {
-    getQuizCategory: (callback) => {
-        mysql.query('select topicId, title, icon from topics order by title', [], (error, results, fields) => {
+    getQuizCategory: (callback) => {title
+        mysql.query('select id, title, icon from topics limit 5', [], (error, results, fields) => {
             if (error) {
                 callback(error);
             }
             const allTopics = results;  //Array
-            getTrendingTopics((err, results) => {
+            /*getTrendingTopics((err, results) => {
                 if(err){
                     callback(err)
                 }
@@ -18,12 +18,10 @@ module.exports = {
                         callback(err)
                     }
 
-                    const topTopics = results;   // Top Topics Array
+                    const topTopics = results;   // Top Topics Array */
 
                     const topicsData = {
-                        topics: allTopics,
-                        trendingTopics: trendingTopics,
-                        topTopics: topTopics
+                        topics: allTopics
                     };
                     return callback(null, topicsData);
                 });

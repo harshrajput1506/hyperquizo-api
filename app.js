@@ -19,7 +19,7 @@ app.use(helmet.noSniff());
 
 // Intialize Routers
 app.use("/hyperquizo/api/v1/users", userRouter);
-app.use("/hyperquizo/api/v1/quiz", quizRouter);
+app.use("/hyperquizo/api/v1/quizo", quizRouter);
 
 
 //Handle Errors

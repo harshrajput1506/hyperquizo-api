@@ -6,16 +6,16 @@ const mysql = createmysql.createConnection({
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.MYSQL_DB,
-    dialect: 'mysql',
-    logging: true,
-    force: true,
-    ssl: true,
-    dialectOptions: {
+    //dialect: 'mysql',
+    //logging: true,
+    //force: true,
+    //ssl: true,
+    /*dialectOptions: {
         ssl: {
             ssl: true,
             cert: fs.readFileSync("./hyperquizo/config/ca-certificate.crt")
         }
-    }
+    }*/
     
 });
 

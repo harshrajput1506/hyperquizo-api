@@ -19,7 +19,8 @@ module.exports = {
         .then(function (decodedToken) {
           let uid = decodedToken.uid;
           if (uid == req.body.uid){
-            checkUserTokens(token, (err, message) => {
+            next();
+            /*checkUserTokens(token, (err, message) => {
               if(err){
                 console.log(err);
                 const errors = err;
@@ -56,7 +57,7 @@ module.exports = {
                 });
               }
 
-            });
+            });*/
           }else{
             return res.status(401).json({
               success: 0,

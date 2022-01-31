@@ -21,10 +21,10 @@ module.exports = {
 
           // Register Process - Insert Query in users table
           mysql.query(
-            'insert into `users` (mid, name, username, email, number, upiId, DOB, gender, state,'
+            'insert into `users` (uid, name, username, email, number, upiID, DOB, gender, state,'
                + 'referCode, friendCode,' 
-               + 'profilePicture)' 
-               + 'values(?,?,?,?,?,"","","","",?,"",?)',
+               + 'profilePicture, address)' 
+               + 'values(?,?,?,?,?,"","","","",?,"",?,"")',
             [
               mid,
               data.name,

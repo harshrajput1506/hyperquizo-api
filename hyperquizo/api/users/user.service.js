@@ -6,7 +6,7 @@ module.exports = {
   loginProcess: (id, callBack) => {
 
     mysql.query(
-        'select * from users where mid = ?',
+        'select * from users where uid = ?',
         [id],
         (error, results, fields) => {
           if (error) {
@@ -33,7 +33,7 @@ module.exports = {
   getUserNumber: (number, callBack) => {
     mysql.query(
       'select * from users where number = ?',
-      [number],
+      [number],   
       (error, results, fields) => {
         if (error) { 
           callBack(error);

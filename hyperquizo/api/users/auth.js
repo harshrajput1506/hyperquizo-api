@@ -15,7 +15,7 @@ module.exports = {
                     callBack(err);
                 }
                 if(results){
-                    mid = results.mid;
+                    mid = results.uid;
                     // Login Process (Phone Number Login)
                     loginProcess(mid,(err, results)=>{
                         if(err){
@@ -43,7 +43,7 @@ module.exports = {
                     callBack(err)
                 }
                 if(results){
-                    mid = results.mid;
+                    mid = results.uid;
                     // Login Process (Google)
                     loginProcess(mid,(err, results)=>{
                         if(err){

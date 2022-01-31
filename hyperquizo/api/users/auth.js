@@ -5,7 +5,7 @@ const { getUserNumber, getUserEmail, loginProcess } = require("./user.service");
 module.exports = {
 
     authProcess: (data, callBack) => {
-        let mid;
+        let uid;
 
         // Check Phone Number Auth or not
         if (!data.number == ""){
@@ -15,9 +15,9 @@ module.exports = {
                     callBack(err);
                 }
                 if(results){
-                    mid = results.uid;
+                    uid = results.uid;
                     // Login Process (Phone Number Login)
-                    loginProcess(mid,(err, results)=>{
+                    loginProcess(uid,(err, results)=>{
                         if(err){
                             callBack(err);
                         }
@@ -43,9 +43,9 @@ module.exports = {
                     callBack(err)
                 }
                 if(results){
-                    mid = results.uid;
+                    uid = results.uid;
                     // Login Process (Google)
-                    loginProcess(mid,(err, results)=>{
+                    loginProcess(uid,(err, results)=>{
                         if(err){
                             callBack(err);
                         }

@@ -2,7 +2,7 @@ const mysql = require("../../config/database");
 
 module.exports = {
 
-  // Get USerData by mid
+  // Get USerData by uid
   loginProcess: (id, callBack) => {
 
     mysql.query(

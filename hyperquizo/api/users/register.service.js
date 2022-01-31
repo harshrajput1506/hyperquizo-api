@@ -7,7 +7,7 @@ module.exports = {
       // Variables
       let referralCode = '';
       let username = '';
-      const mid = data.uid;
+      const uid = data.uid;
       
       // Get Username & referCode for Generate NewOne
       mysql.query('select referCode, username from users', [], function (error, results, fields) {
@@ -26,7 +26,7 @@ module.exports = {
                + 'profilePicture, address)' 
                + 'values(?,?,?,?,?,"","","","",?,"",?,"")',
             [
-              mid,
+              uid,
               data.name,
               username,
               data.email,
@@ -40,7 +40,7 @@ module.exports = {
                 callBack(error);
               }
               const data = {
-                mid: mid,
+                uid: uid,
                 referCode: referralCode,
                 username: username
               }

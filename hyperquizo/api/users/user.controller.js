@@ -131,7 +131,7 @@ module.exports = {
 
   login: (req, res) => {
     const body = req.body;
-    loginProcess(body.mid, (err, results) => {
+    loginProcess(body.uid, (err, results) => {
       if (err) {
         console.log(err);
         const errors = err;

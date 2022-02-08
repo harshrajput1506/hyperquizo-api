@@ -14,7 +14,10 @@ app.use(morgan("dev"));
 
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(helmet.noSniff());
+
+app.use('/res/uploads', express.static('./res/uploads'));
 // app.use(express.static(path.join(__dirname, 'public')))
 
 // Intialize Routers

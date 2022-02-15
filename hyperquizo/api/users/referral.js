@@ -3,7 +3,7 @@ const { getUserCode, getUserbyID, loginProcess } = require("./user.service");
 
 module.exports = {
   referralProcess: (data, callBack) => {
-    if(!data.friendCode == ""){
+    if(data.friendCode != ""){
 
       getUserCode(data.friendCode, (err, results) => {
         if (err) {

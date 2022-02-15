@@ -6,3 +6,10 @@ Request Body - Bearer Token, uid, email, name, phoneNumber, profilePhoto
 Reponse Body - userData, message
 
 
+2. /post methond - /hyperquizo/api/v1/users/2902
+
+RequestBody - Token, uid, friendCode, name, profilePicture
+Response Body - 1. message (Completed)
+                2. message (Something Went Wrong)
+                3. message (Invalid Referrqal Code)
+

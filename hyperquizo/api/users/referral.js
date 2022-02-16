@@ -19,7 +19,7 @@ module.exports = {
               if (results.friendCode == "") {
   
                 // Referral Process
-                const referralAmount = 00;     // Rs. 200 Cash Bonus
+                const referralAmount = 200;     // Rs. 200 Cash Bonus
   
                 // Update Amount in User Data
                 mysql.query('Update users set bonusBalance = bonusBalance+?, friendCode = ? where uid = ?',
@@ -66,7 +66,7 @@ module.exports = {
                 
                 // Insert Friend's New Joining 
                 mysql.query(
-                  'Insert into Joinings (uid, friendid, amount, bonusAmount) values(?,?,?,?)',
+                  'Insert into joinings (uid, friendid, amount, bonusAmount) values(?,?,?,?)',
                   [frienduid, data.uid, 0, referralAmount],
                   (error, results, fields) => {
                     if (error) {
@@ -102,7 +102,7 @@ module.exports = {
     } 
 
     mysql.query('update users set name = ?, profilePicture = ? where uid = ?',
-     [data.name, data.profiePicture, data.uid],
+     [data.name, data.profilePicture, data.uid],
      (error, results, fields) => {
        if(error){
          callBack(error)

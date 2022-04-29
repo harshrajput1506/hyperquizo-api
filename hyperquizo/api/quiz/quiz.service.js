@@ -36,7 +36,7 @@ module.exports = {
             if(results){
                 return callback(null, results);
             } else {
-                return callback("Fetching Error", null);
+                return callback("Fetching Error");
             }
 
         });

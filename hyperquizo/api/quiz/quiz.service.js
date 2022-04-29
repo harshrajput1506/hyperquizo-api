@@ -27,6 +27,20 @@ module.exports = {
 
         });
     },
+
+    getPool: (title, category, callback) => {
+        mysql.query("select * from quizPool where title = ?", [title], (error, results, fields) =>{
+            if (error) {
+                callback(error);
+            }
+            if(results){
+                return callback(null, results);
+            } else {
+                return callback("Fetching Error", null);
+            }
+
+        });
+    },
    
 
 

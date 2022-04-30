@@ -29,7 +29,7 @@ module.exports = {
     },
 
     getPool: (title, category, callback) => {
-        mysql.query("select * from quizPool where title = ? order  by entryFee", [title], (error, results, fields) =>{
+        mysql.query("select * from quizPool where title = ? order  by entryFees", [title], (error, results, fields) =>{
             if (error) {
                 callback(error);
             }

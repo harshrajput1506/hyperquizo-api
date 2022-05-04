@@ -32,9 +32,8 @@ const {
       },
 
       getQuizPool: (req, res) => {
-      let title = req.query.title;
       let category = req.query.category;
-        getPool(title, category,(err, results) => {
+        getPool(category,(err, results) => {
           if (err) {
             console.log(err);
             return;

@@ -19,13 +19,13 @@ module.exports = {
 
   getWalletProcess: (id, callBack) => {
     mysql.query(
-        'select totalBalance, depositBalance, winningBalance, bonusBalance from users where uid = ?',
+        'select uid, totalBalance, depositBalance, winningBalance, bonusBalance from users where uid = ?',
         [id],
         (error, results, fields) => {
           if (error) {
             callBack(error);
           }
-          return callBack(null, results);
+          return callBack(null, results[0]);
         });
   },
 

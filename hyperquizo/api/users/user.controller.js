@@ -2,7 +2,8 @@ const {
   getUserCode,
   getUserEmail,
   getUsername,
-  loginProcess
+  loginProcess,
+  getWalletProcess
 } = require("./user.service");
 const { authProcess } = require("./auth");
 const { referralProcess } = require("./referral");
@@ -35,10 +36,7 @@ module.exports = {
             message: message,
             data: results
           });
-
         }
-
-
       } else {
         return res.status(400).json({
           success: 0,
@@ -89,6 +87,64 @@ module.exports = {
     });
   },
 
+  login: (req, res) => {
+    const body = req.body;
+    loginProcess(body.uid, (err, results) => {
+      if (err) {
+        console.log(err);
+        const errors = err;
+        return res.status(500).json({
+          success: 0,
+          message: "Database connection errror : ", errors
+        });
+      }
+      if (results) {
+        return res.status(200).json({
+          success: 1,
+          data: results,
+
+        });
+
+      } else {
+        return res.status(404).json({
+          success: 0,
+          message: "Not Found",
+          results
+        });
+      }
+
+    });
+
+  },
+
+  getWallet: (req, res) => {
+    const body = req.body;
+    getWalletProcess(body.uid, (err, results) => {
+      if (err) {
+        console.log(err);
+        const errors = err;
+        return res.status(500).json({
+          success: 0,
+          message: "Database connection errror : ", errors
+        });
+      }
+      if (results) {
+        return res.status(200).json({
+          success: 1,
+          data: results,
+
+        });
+
+      } else {
+        return res.status(404).json({
+          success: 0,
+          message: "Not Found",
+          results
+        });
+      }
+    });
+  },
+
 
 
 
@@ -127,36 +183,6 @@ module.exports = {
         message: "Something Went Wrong"
       });
     });
-  },
-
-  login: (req, res) => {
-    const body = req.body;
-    loginProcess(body.uid, (err, results) => {
-      if (err) {
-        console.log(err);
-        const errors = err;
-        return res.status(500).json({
-          success: 0,
-          message: "Database connection errror : ", errors
-        });
-      }
-      if (results) {
-        return res.status(200).json({
-          success: 1,
-          data: results,
-
-        });
-
-      } else {
-        return res.status(404).json({
-          success: 0,
-          message: "Not Found",
-          results
-        });
-      }
-
-    });
-
   },
 
   checkData: (req, res) => {

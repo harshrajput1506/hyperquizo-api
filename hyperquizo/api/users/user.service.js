@@ -16,6 +16,19 @@ module.exports = {
         });
   },
 
+
+  getWalletProcess: (id, callBack) => {
+    mysql.query(
+        'select totalBalance, depositBalance, winningBalance, bonusBalance from users where uid = ?',
+        [id],
+        (error, results, fields) => {
+          if (error) {
+            callBack(error);
+          }
+          return callBack(null, results[0]);
+        });
+  },
+
   // Get UserData by referCode
   getUserCode: (friendCode, callBack) => {
     mysql.query(

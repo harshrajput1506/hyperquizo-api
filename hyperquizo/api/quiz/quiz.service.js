@@ -29,7 +29,9 @@ module.exports = {
     },
 
     getPool: (category, callback) => {
-        mysql.query("select * from quizPool where category = ? order  by entryFees", [category], (error, results, fields) =>{
+        var query1 = "update users set depositBalance = if(depositBalance>1, depositBalance-1, depositBalance) where id = 1";
+        const query ="select * from quizPool where category = ? order  by entryFees";
+        mysql.query(query1, [category], (error, results, fields) =>{
             if (error) {
                 callback(error);
             }

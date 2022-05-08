@@ -29,14 +29,12 @@ module.exports = {
     },
 
     getPool: (category, callback) => {
-        var query1 = "update users set depositBalance = if(depositBalance>1, depositBalance-1, depositBalance) where id = 1";
         const query ="select * from quizPool where category = ? order  by entryFees";
-        mysql.query(query1, [category], (error, results, fields) =>{
+        mysql.query(query, [category], (error, results, fields) =>{
             if (error) {
                 callback(error);
             }
             if(results){
-                console.log("fields : ",fields);
                 return callback(null, results);
             } else {
                 return callback("Fetching Error");

@@ -38,7 +38,7 @@ const {
             console.log(err);
             return;
           }
-          if(results){
+          if(results[0]){
             return res.status(200).json({
               success: 1,
               data: results

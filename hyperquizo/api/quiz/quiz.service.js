@@ -34,6 +34,7 @@ module.exports = {
                 callback(error);
             }
             if(results){
+                console.log("fields : ",fields);
                 return callback(null, results);
             } else {
                 return callback("Fetching Error");

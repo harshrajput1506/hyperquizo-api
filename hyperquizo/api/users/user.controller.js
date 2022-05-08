@@ -138,8 +138,7 @@ module.exports = {
       } else {
         return res.status(404).json({
           success: 0,
-          message: "Not Found",
-          results
+          message: "Not Found"
         });
       }
     });

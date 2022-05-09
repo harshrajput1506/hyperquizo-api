@@ -118,8 +118,8 @@ module.exports = {
   },
 
   getWallet: (req, res) => {
-    const body = req.body;
-    getWalletProcess(body.uid, (err, results) => {
+    const uid = req.query.uid;
+    getWalletProcess(uid, (err, results) => {
       if (err) {
         console.log(err);
         const errors = err;

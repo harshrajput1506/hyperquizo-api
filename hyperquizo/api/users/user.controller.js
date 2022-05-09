@@ -7,6 +7,8 @@ const {
 } = require("./user.service");
 const { authProcess } = require("./auth");
 const { referralProcess } = require("./referral");
+const { poolPayProcess } = require("./pool.payment");
+
 
 
 
@@ -120,6 +122,34 @@ module.exports = {
   getWallet: (req, res) => {
     const uid = req.query.uid;
     getWalletProcess(uid, (err, results) => {
+      if (err) {
+        console.log(err);
+        const errors = err;
+        return res.status(500).json({
+          success: 0,
+          message: "Database connection errror : ", errors
+        });
+      }
+      if (results) {
+        return res.status(200).json({
+          success: 1,
+          data: results,
+
+        });
+
+      } else {
+        return res.status(404).json({
+          success: 0,
+          message: "Not Found"
+        });
+      }
+    });
+  },
+
+
+  payQuiz: (req, res) => {
+    const body = req.body;
+    poolPayProcess(body, (err, results) => {
       if (err) {
         console.log(err);
         const errors = err;

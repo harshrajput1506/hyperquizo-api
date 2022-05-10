@@ -5,13 +5,14 @@ module.exports = {
 
     poolPayProcess : (data, callback) => {
         mysql.query(
-            'update users set depositBalance = if(depositBalance>=?, depositBalance-?, depositBalance), winningBalance = if(winningBalance>=?, winningBalance-?, winningBalance), bonusBalance = if(bonusBalance>=?, bonusBalance-?, bonusBalance), totalBalance = totalBalance-? where uid = ?',
+            'update users set depositBalance = if(depositBalance>=?, depositBalance-?, depositBalance), winningBalance = if(winningBalance>=?, winningBalance-?, winningBalance), bonusBalance = if(bonusBalance>=?, bonusBalance-?, bonusBalance), totalBalance = if(totalBalance>=?, totalBalance-?, totalBalance) where uid = ?',
             [ data.depositEntry,
               data.depositEntry,
               data.winningEntry,
               data.winningEntry,
               data.bonusEntry,
               data.bonusEntry,
+              data.totalEntry,
               data.totalEntry,
               data.uid
 

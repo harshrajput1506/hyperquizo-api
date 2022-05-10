@@ -37,6 +37,7 @@ module.exports = {
       [
         body.uid,
         body.title,
+        body.message,
         body.amount,
         body.type
       ],

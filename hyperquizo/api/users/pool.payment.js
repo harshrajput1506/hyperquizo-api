@@ -1,4 +1,5 @@
 const mysql = require("../../config/database");
+const { insertTransactions } = require("./user.service");
 
 module.exports = {
 
@@ -19,7 +20,29 @@ module.exports = {
               if (error) {
                 callback(error);
               }
-              return callback(null, results);
+              if(results.changedRows==1){
+                 
+                const transactionsData = {
+                    "type": "Debit",
+                    "amount":data.totalEntry,
+                    "uid":data.uid,
+                    "title":"Joined A Game",
+                    "message":"Joined a game"
+                };
+                insertTransactions(transactionsData, (err, results) => {
+                    if(err){
+                        callback(err)
+                    }
+
+                    if(results){
+                        callback(null, results)
+                    }
+                });
+
+              } else {
+                return callback(null, "Invalid Update");
+              }
+              
             });
     },
 };

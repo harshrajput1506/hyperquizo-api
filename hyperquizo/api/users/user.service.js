@@ -29,6 +29,27 @@ module.exports = {
         });
   },
 
+  //Insert Transactions
+  insertTransactions: (body, callBack) => {
+    mysql.query(
+      'Insert into transactions (uid, title, message, status, amount, datetime, type) '
+      + 'values(?,?,?,"Success",?,now(), ?)',
+      [
+        body.uid,
+        body.title,
+        body.message,
+        body.amount,
+        body,type
+      ],
+      (error, results, fields) => {
+        if (error) {
+          callBack(error);
+        } 
+        return callBack(null, results);
+      }
+    );
+  },
+
   // Get UserData by referCode
   getUserCode: (friendCode, callBack) => {
     mysql.query(

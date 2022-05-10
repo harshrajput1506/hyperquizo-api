@@ -21,7 +21,7 @@ module.exports = {
     mysql.query(
         'select uid, totalBalance, depositBalance, winningBalance, bonusBalance from users where uid = ?',
         [id],
-        (error, results, fields) => {
+        function(error, results) {
           if (error) {
             callBack(error);
           }
@@ -37,9 +37,8 @@ module.exports = {
       [
         body.uid,
         body.title,
-        body.message,
         body.amount,
-        body,type
+        body.type
       ],
       (error, results, fields) => {
         if (error) {
@@ -79,7 +78,7 @@ module.exports = {
 
   checkUserTokens: (token, callBack) =>{
     mysql.query('select * from usedTokens where token = ?', [token],
-    (error, results, fields) => {
+    function(error, results) {
       if(error){
         callBack(error);
       }

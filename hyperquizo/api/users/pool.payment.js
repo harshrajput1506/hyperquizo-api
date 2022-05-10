@@ -29,13 +29,14 @@ module.exports = {
                     "title":"Joined A Game",
                     "message":"Joined a game"
                 };
-                insertTransactions(transactionsData, (err, results) => {
+                insertTransactions(transactionsData, (err, result) => {
                     if(err){
                         callback(err)
                     }
 
-                    if(results){
-                        callback(null, results)
+                    if(result){
+                        const data = {"update":results,"insert":result}
+                        callback(null, data)
                     }
                 });
 

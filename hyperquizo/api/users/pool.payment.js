@@ -1,4 +1,5 @@
 const mysql = require("../../config/database");
+const { getRoomByPoolID, getQuestionsByCategory, createNewRoom, updateExistingRoom, updatePoolPlayers } = require("../quiz/quiz.service");
 const { insertTransactions } = require("./user.service");
 
 module.exports = {
@@ -35,10 +36,64 @@ module.exports = {
                         callback(err)
                     }
 
-                    if(result){
-                        const data = {"update":results,"insert":result}
-                        callback(null, data)
-                    }
+                    getRoomByPoolID(data.poolID, (err, results) => {
+
+                      if(err){
+                        callback(err)
+                      } 
+                      if(results){
+                        //Room Already Existed
+                        const roomID = results.id;
+                        const questionSet = results.questionSet;
+                        updateExistingRoom(data, roomID, (err, result) => {
+                          if(err){
+                            callback(err);
+                          }
+                          const playersJoined = 0;
+                          updatePoolPlayers(data, playersJoined, (err, result) => {
+                            if(err){
+                              callback(err);
+                            }
+                          });
+                          const message = "Room Already Created";
+                          const snapshot = {roomID, message, questionSet}
+                          return callback(null, snapshot);
+                        });
+                        
+                      } else {
+                        //Room Not Existed - Create New Room
+                        getQuestionsByCategory(data, (err, result) => {
+                          if(err) {
+                            callback(err);
+                          }
+
+                          if(result[0]){
+                            const questionsSet = JSON.stringify(result); 
+                            createNewRoom(data, questionsSet, (err, result) => {
+                              if(err){
+                                callback(err);
+                              }
+                              const playersJoined = 1;
+                              updatePoolPlayers(data, playersJoined, (err, result) => {
+                                if(err){
+                                  callback(err);
+                                }
+                              });
+                              const roomID = result.insertId;
+                              const message = "created New Room";
+                              const snapshot = {roomID, message, questionsSet};
+
+                              return callback(null, snapshot);
+
+                            });        
+                          } else {
+                            return callback(null, "Invalid Update");
+                          }
+
+                        });
+                      }
+                  
+                    });
                 });
 
               } else {

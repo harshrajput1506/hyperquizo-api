@@ -155,7 +155,7 @@ module.exports = {
         const errors = err;
         return res.status(500).json({
           success: 0,
-          message: "Database connection errror : ", errors
+          message: "Database connection errror", errors
         });
       }
       if (results) {

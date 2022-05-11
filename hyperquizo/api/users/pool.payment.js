@@ -97,7 +97,8 @@ module.exports = {
                 });
 
               } else {
-                return callback(null, "Invalid Update");
+                const message = {"message":"Invalid Update"};
+                return callback(null, message);
               }
               
             });

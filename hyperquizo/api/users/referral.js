@@ -22,8 +22,9 @@ module.exports = {
                 const referralAmount = 200;     // Rs. 200 Cash Bonus
   
                 // Update Amount in User Data
-                mysql.query('Update users set bonusBalance = bonusBalance+?, friendCode = ? where uid = ?',
+                mysql.query('Update users set bonusBalance = bonusBalance+?, totalBalance=totalBalance+?, friendCode = ? where uid = ?',
                   [referralAmount,
+                    referralAmount,
                     data.friendCode,
                     data.uid],
                   (error, results, fields) => {
@@ -34,8 +35,8 @@ module.exports = {
   
                 // Update Amount in Friend's Data
                 mysql.query(
-                  'Update users set bonusBalance = bonusBalance+?, joinings = joinings+1 where uid = ?',
-                  [referralAmount, frienduid],
+                  'Update users set bonusBalance = bonusBalance+?, totalBalance = totalBalance+?, joinings = joinings+1 where uid = ?',
+                  [referralAmount,referralAmount, frienduid],
                   (error, results, fields) => {
                     if (error) {
                       callBack(error)

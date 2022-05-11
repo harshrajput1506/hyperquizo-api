@@ -80,7 +80,7 @@ module.exports = {
                                 }
                               });
                               const roomID = result.insertId;
-                              const message = "created New Room";
+                              const message = "Created New Room";
                               const snapshot = {roomID, message, questionsSet};
 
                               return callback(null, snapshot);

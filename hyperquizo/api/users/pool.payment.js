@@ -81,7 +81,7 @@ module.exports = {
                               });
                               const roomID = result.insertId;
                               const message = "Created New Room";
-                              const snapshot = {roomID, message, questionSet};
+                              const snapshot = {roomID, message};
 
                               return callback(null, snapshot);
 

@@ -68,8 +68,8 @@ module.exports = {
                           }
 
                           if(result[0]){
-                            const questionsSet = JSON.stringify(result); 
-                            createNewRoom(data, questionsSet, (err, result) => {
+                            const questionSet = JSON.stringify(result); 
+                            createNewRoom(data, questionSet, (err, result) => {
                               if(err){
                                 callback(err);
                               }
@@ -81,7 +81,7 @@ module.exports = {
                               });
                               const roomID = result.insertId;
                               const message = "Created New Room";
-                              const snapshot = {roomID, message, questionsSet};
+                              const snapshot = {roomID, message, questionSet};
 
                               return callback(null, snapshot);
 

@@ -25,7 +25,7 @@ module.exports = {
             player2picture: data.profilePicture,
             player2id: data.uid,
             status: "Live",
-            palyersJoined: 2,
+            playersJoined: 2,
             player2status: "Online",
             player2points: 0
         };
@@ -54,7 +54,7 @@ module.exports = {
             player2id: null,
             player2picture: null,
             player1picture: data.profilePicture,
-            palyersJoined: 1,
+            playersJoined: 1,
             entryFee: data.entryFee,
             prizePool: data.prizePool,
             questionSet: questionSet,

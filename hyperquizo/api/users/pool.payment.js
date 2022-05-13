@@ -37,7 +37,7 @@ module.exports = {
                         callback(err)
                     }
 
-                    getRoomByPoolID(data.poolID, (err, results) => {
+                    getRoomByPoolID(data.roomID, (err, results) => {
 
                       if(err){
                         callback(err)

@@ -3,19 +3,17 @@ const db = admin.firestore();
 
 module.exports = {
 
-    getRoomByPoolID: async function(poolID, callback) {
-        const rooms = db.collection('gameRooms');
-        const snapshot = await rooms.where('poolID', '==', poolID).where('status', '==', 'Open').limit(1).get();
-        let results;
-        if (snapshot.empty) {
-            results =null;
-          } else if (snapshot.size >= 1){
-            console.log("Snapshot - ",snapshot.size);
-            const roomID = snapshot.docs.at(0).id;
+    getRoomByPoolID: async function(roomID, callback) {
+        if(roomID){
+            //Room Created
             results = {roomID}
-          }
-          
-          return callback(null, results);
+           
+        } else {
+            //Room Not Create
+            results=null;
+        } 
+        
+        return callback(null, results);
     },
 
     updateExistingRoom: async (data,roomID,callback) => {

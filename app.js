@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const helmet = require('helmet');
 const app = express();
+const admin = require('firebase-admin');
 const morgan = require('morgan');
 var path = require('path');
 
@@ -23,6 +24,8 @@ app.use('/res/uploads', express.static('./res/uploads'));
 // Intialize Routers
 app.use("/hyperquizo/api/v1/users", userRouter);
 app.use("/hyperquizo/api/v1/quizo", quizRouter);
+
+
 
 
 //Handle Errors

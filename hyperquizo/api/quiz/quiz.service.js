@@ -43,6 +43,26 @@ module.exports = {
         });
     },
 
+    updatePoolPlayers: (data,players,callback) => {
+        const query ="update quizPool set playersJoined=? where id=?" ;
+        mysql.query(query,
+            [
+                players,
+                data.poolID
+
+            ], (error, results, fields) =>{
+            if (error) {
+                callback(error);
+            }
+            if(results){
+                return callback(null, results);
+            } else {
+                return callback(null, "Fetching Error");
+            }
+
+        });
+    },
+
     getQuestionsByCategory: (data, callback) => {
         const query ="select * from questions, questionscategory where questionscategory.categories=? AND questions.id=questionscategory.questionID order by rand() limit ?;";
         mysql.query(query, [data.category, data.questions], (error, results, fields) =>{
@@ -57,6 +77,9 @@ module.exports = {
 
         });
     },
+
+
+    // Mysql gameRooms - Right now - Not using.... Using Firestore DB gamerooms
 
     getRoomByPoolID: (poolID, callback) => {
         const query ="select * from gamerooms where poolId=? AND status='Open'";
@@ -117,27 +140,6 @@ module.exports = {
 
         });
     },
-
-    updatePoolPlayers: (data,players,callback) => {
-        const query ="update quizPool set playersJoined=? where id=?" ;
-        mysql.query(query,
-            [
-                players,
-                data.poolID
-
-            ], (error, results, fields) =>{
-            if (error) {
-                callback(error);
-            }
-            if(results){
-                return callback(null, results);
-            } else {
-                return callback(null, "Fetching Error");
-            }
-
-        });
-    },
-   
 
 
 };

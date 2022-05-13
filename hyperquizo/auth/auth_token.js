@@ -1,12 +1,10 @@
 const admin = require("firebase-admin");
 const serviceAccount = require("../../securityAccount.json");
 const { checkUserTokens, setUserTokens } = require("../api/users/user.service");
-
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://quiz-a192b.firebaseio.com"
 });
-
 module.exports = {
 
 

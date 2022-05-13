@@ -1,5 +1,6 @@
 const mysql = require("../../config/database");
-const { getRoomByPoolID, getQuestionsByCategory, createNewRoom, updateExistingRoom, updatePoolPlayers } = require("../quiz/quiz.service");
+const { getRoomByPoolID, updateExistingRoom, createNewRoom } = require("../quiz/gameroom");
+const {  getQuestionsByCategory, updatePoolPlayers } = require("../quiz/quiz.service");
 const { insertTransactions } = require("./user.service");
 
 module.exports = {
@@ -43,8 +44,7 @@ module.exports = {
                       } 
                       if(results){
                         //Room Already Existed
-                        const roomID = results.id;
-                        const questionSet = results.questionSet;
+                        const roomID = results.roomID;
                         updateExistingRoom(data, roomID, (err, result) => {
                           if(err){
                             callback(err);
@@ -56,7 +56,7 @@ module.exports = {
                             }
                           });
                           const message = "Room Already Created";
-                          const snapshot = {roomID, message, questionSet}
+                          const snapshot = {roomID, message}
                           return callback(null, snapshot);
                         });
                         
@@ -79,7 +79,7 @@ module.exports = {
                                   callback(err);
                                 }
                               });
-                              const roomID = result.insertId;
+                              const roomID = result;
                               const message = "Created New Room";
                               const snapshot = {roomID, message};
 

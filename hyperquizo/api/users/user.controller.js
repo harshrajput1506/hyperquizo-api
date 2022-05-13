@@ -11,7 +11,6 @@ const { poolPayProcess } = require("./pool.payment");
 
 
 
-
 module.exports = {
 
   auth: (req, res) => {
@@ -173,9 +172,6 @@ module.exports = {
       }
     });
   },
-
-
-
 
 
   //Other COntrollers

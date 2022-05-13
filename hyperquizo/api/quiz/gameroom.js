@@ -5,7 +5,7 @@ module.exports = {
 
     getRoomByPoolID: async function(poolID, callback) {
         const rooms = db.collection('gameRooms');
-        const snapshot = await rooms.where('poolID', '==', poolID).where('status', '==', 'Open').get();
+        const snapshot = await rooms.where('poolID', '==', poolID).where('status', '==', 'Open').limit(1).get();
         let results;
         if (snapshot.empty) {
             results =null;

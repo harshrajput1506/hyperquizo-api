@@ -17,13 +17,12 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(helmet.noSniff());
-
 app.use('/res/uploads', express.static('./res/uploads'));
 // app.use(express.static(path.join(__dirname, 'public')))
 
 // Intialize Routers
 app.use("/hyperquizo/api/v1/users", userRouter);
-app.use("/hyperquizo/api/v1/quizo", quizRouter);
+app.use("/hyperquizo/api/v1/quizo", quizRouter);  //Initialize quiz router
 
 
 

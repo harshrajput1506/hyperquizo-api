@@ -24,8 +24,6 @@ app.use('/res/uploads', express.static('./res/uploads'));
 app.use("/hyperquizo/api/v1/users", userRouter);
 app.use("/hyperquizo/api/v1/quizo", quizRouter);  //Initialize quiz router
 
-//testing
-
 
 //Handle Errors
 app.use((req, res, next) => {

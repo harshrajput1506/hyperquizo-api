@@ -29,7 +29,7 @@ module.exports = {
     },
 
     getPool: (category, callback) => {
-        const query ="select * from quizPool where category = ? order  by entryFees";
+        const query ="select * from quizpool where category = ? order  by entryFees";
         mysql.query(query, [category], (error, results, fields) =>{
             if (error) {
                 callback(error);
@@ -44,7 +44,7 @@ module.exports = {
     },
 
     updatePoolPlayers: (data,players,callback) => {
-        const query ="update quizPool set playersJoined=? where id=?" ;
+        const query ="update quizpool set playersJoined=? where id=?" ;
         mysql.query(query,
             [
                 players,

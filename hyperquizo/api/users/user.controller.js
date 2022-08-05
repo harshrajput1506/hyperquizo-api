@@ -69,9 +69,10 @@ module.exports = {
             message: msg
           });
         } else {
+          const msg = results;
           return res.status(201).json({
             success: 1,
-            message: results,
+            message: msg
           });
 
         }

@@ -3,6 +3,7 @@ const { getUserCode, getUserbyID, loginProcess } = require("./user.service");
 
 module.exports = {
   referralProcess: (data, callBack) => {
+    let message = "Completed"
     if(data.friendCode != ""){
 
       getUserCode(data.friendCode, (err, results) => {
@@ -44,10 +45,21 @@ module.exports = {
                   });
   
                 // Insert User Transaction
+                const title = "CASH BONUS ADDED";
+                const message = "Referral user bonus of Rs. 200";
+                const status = "Success";
+                const type = "Reward";
                 mysql.query(
-                  'Insert into transactions (uid, title, message, status, amount, datetime, type) '
-                  + 'values(?,"CASH BONUS ADDED","Referral user bonus of Rs. 200","Success",?,now(), "Rewards")',
-                  [data.uid, referralAmount],
+                  "Insert into transactions (uid, title, message, status, amount, datetime, type) "
+                  + "values(?,?,?,?,?,now(),?)",
+                  [
+                    data.uid,
+                    title,
+                    message,
+                    status,
+                    referralAmount,
+                    type
+                  ],
                   (error, results, fields) => {
                     if (error) {
                       callBack(error);
@@ -55,10 +67,18 @@ module.exports = {
                   });
   
                 // Insert Friend's Transaction
+                
                 mysql.query(
-                  'Insert into transactions (uid, title, message, status, amount, datetime, type) '
-                  + 'values(?,"CASH BONUS ADDED","Referral user bonus of Rs. 200","Success",?,now(), "Rewards")',
-                  [frienduid, referralAmount],
+                  "Insert into transactions (uid, title, message, status, amount, datetime, type) "
+                  + "values(?,?,?,?,?,now(),?)",
+                  [
+                    frienduid,
+                    title,
+                    message,
+                    status,
+                    referralAmount,
+                    type
+                  ],
                   (error, results, fields) => {
                     if (error) {
                       callBack(error);
@@ -79,23 +99,22 @@ module.exports = {
   
               } else {
                 // if friendCode is already inserted 
-                return callBack(null, null)
+                message = "Multi Request for Referral"
+                console.log("Data", message);
   
               }
   
             } else {
               // if user data is not in the table 
-              return callBack(null, null)
+              message = "User not exist"
+              console.log("Data", message);
             }
   
           });
   
-  
-  
         } else {
           // if friend's code not exist
-          const msg = "Invalid Referral Code"
-          return callBack(null, msg)
+          message = "Invalid Referral Code"
         }
   
       });
@@ -108,7 +127,8 @@ module.exports = {
        if(error){
          callBack(error)
        }
-       return callBack(null, "Completed");
+       console.log("Data1", message);
+       return callBack(null, message);
      });
     
   },

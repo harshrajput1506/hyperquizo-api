@@ -31,7 +31,7 @@ module.exports = {
 
   //Insert Transactions
   insertTransactions: (body, callBack) => {
-    const status = "Success";
+    const status = 'Success';
     mysql.query(
       'Insert into transactions (uid, title, message, status, amount, datetime, type) '
       + 'values(?,?,?,?,?,now(), ?)',

@@ -24,13 +24,15 @@ module.exports = {
                 callback(error);
               }
               if(results.changedRows==1){
+
+                const message = "Joined a game of ₹"+totalEntry;
                  
                 const transactionsData = {
                     "type": "Debit",
                     "amount":data.totalEntry,
                     "uid":data.uid,
                     "title":"Joined A Game",
-                    "message":"Joined a game"
+                    "message":message
                 };
                 insertTransactions(transactionsData, (err, result) => {
                     if(err){

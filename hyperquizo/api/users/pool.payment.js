@@ -25,7 +25,7 @@ module.exports = {
               }
               if(results.changedRows==1){
 
-                const message = "Joined a game of ₹"+totalEntry;
+                const message = "Joined a game of ₹"+data.totalEntry;
                  
                 const transactionsData = {
                     "type": "Debit",

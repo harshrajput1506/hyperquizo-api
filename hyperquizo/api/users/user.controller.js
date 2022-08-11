@@ -3,7 +3,9 @@ const {
   getUserEmail,
   getUsername,
   loginProcess,
-  getWalletProcess
+  getWalletProcess,
+  addwalletBalance,
+  insertTransactions
 } = require("./user.service");
 const { authProcess } = require("./auth");
 const { referralProcess } = require("./referral");
@@ -143,6 +145,47 @@ module.exports = {
           message: "Not Found"
         });
       }
+    });
+  },
+
+  //Controller for Add WallletBalance
+  addWallet: (req, res) => {
+    const body = req.body;
+    addwalletBalance(body,(err, results) => {
+      if (err) {
+        console.log(err);
+        const errors = err;
+        return res.status(500).json({
+          success: 0,
+          message: "Database connection errror", errors
+        });
+      };
+      let message;
+      if(results.changedRows==1){
+        // Insert Transaction Records
+        
+        insertTransactions(body,(err, results) => {
+          if(err){
+            console.log(err);
+            return res.status(500).json({
+              success:0,
+              message:"Database Connection Error",err
+            });         
+          }          
+        });
+        message = "Balance Added Successfuly"
+        return res.status(200).json({
+          success:1,
+          data: message
+        });
+      } else {
+        message = "Balance Added Failed";
+        return res.status(200).json({
+          success:0,
+          data: message
+        });
+      };
+
     });
   },
 

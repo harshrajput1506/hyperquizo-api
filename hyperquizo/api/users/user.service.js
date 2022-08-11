@@ -29,6 +29,26 @@ module.exports = {
         });
   },
 
+  //Adding Balance in Wallet
+  addwalletBalance: (body,callBack) => {
+    mysql.query(
+      'update users set depositBalance = depositBalance+?, winningBalance = winningBalance+?, bonusBalance = bonusBalance+?, totalBalance = totalBalance+? where uid = ?',
+      [
+        body.depositBalance,
+        body.winningBalance,
+        body.bonusBalance,
+        body.totalBalance,
+        body.uid
+      ],
+      function(error, results) {
+        if(error){
+          callBack(error)
+        }
+        return callBack(null, results)
+      }
+    )
+  },
+
   //Insert Transactions
   insertTransactions: (body, callBack) => {
     const status = 'Success';
@@ -40,7 +60,7 @@ module.exports = {
         body.title,
         body.message,
         status,
-        body.amount,
+        body.totalBalance,
         body.type
       ],
       (error, results, fields) => {

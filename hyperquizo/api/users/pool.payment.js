@@ -34,7 +34,7 @@ module.exports = {
                     "title":"Joined A Game",
                     "message":message
                 };
-                console.log("Pool Payment : ",totalEntry);
+                console.log("Pool Payment : ",data.totalEntry);
                 insertTransactions(transactionsData, (err, result) => {
                     if(err){
                         callback(err)

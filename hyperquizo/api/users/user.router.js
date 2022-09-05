@@ -13,7 +13,7 @@ router.post("/2901",verifyToken, auth); //Main Auth Request
 router.post("/2902", verifyToken ,referral); //Optional Request For Referral Code
 router.post("/3901",verifyToken,login);
 router.get("/3902", getWallet)
-router.patch("/4901", verifyToken ,payQuiz); //Pool Payment Process
-router.patch("/4911", verifyToken, addWallet); //Add Balance in Wallet
+router.post("/4901", verifyToken ,payQuiz); //Pool Payment Process
+router.post("/4911", verifyToken, addWallet); //Add Balance in Wallet
 
 module.exports = router;

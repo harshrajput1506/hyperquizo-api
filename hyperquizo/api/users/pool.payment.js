@@ -29,7 +29,7 @@ module.exports = {
                  
                 const transactionsData = {
                     "type": "Debit",
-                    "amount":data.totalEntry,
+                    "totalBalance":data.totalEntry,
                     "uid":data.uid,
                     "title":"Joined A Game",
                     "message":message
